@@ -48,8 +48,8 @@ team_t team = {
 #define PACK(size, alloc)   ((size) | (alloc))
 
 /* Read and write a word at address p */
-#define GET(p)          (*(unsigned int) (p))
-#define PUT(p, val)     (*(unsigned int) (p) = (val))
+#define GET(p)          (*(unsigned int *) (p))
+#define PUT(p, val)     (*(unsigned int *) (p) = (val))
 
 /* Read the size and allocated fields from address */
 #define GET_SIZE(p)     (GET(p) & ~0x7)
@@ -238,7 +238,7 @@ static void* find_fit(size_t asize)
     /* First-fit search */
     void* bp;
     for (bp = heap_listp; GET_SIZE(HDRP(bp)) > 0; bp = NEXT_BLKP(bp)) {
-        if (!GET_ALLOC(HDRP(bp)) && (asize <= GET_SIZE(HDRP(bp)))
+        if (!GET_ALLOC(HDRP(bp)) && (asize <= GET_SIZE(HDRP(bp))))
         {
             return bp;
         }
