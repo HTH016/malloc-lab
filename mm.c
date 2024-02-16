@@ -118,7 +118,7 @@ void *mm_malloc(size_t size)
     }
 
     /* Search the free list for a fit */
-    if ((bp = find_fit(asize) != NULL) {
+    if ((bp = find_fit(asize)) != NULL) {
         place(bp, asize);
         return bp;
     }
@@ -147,9 +147,9 @@ void *mm_malloc(size_t size)
 /*
  * mm_free - Freeing a block does nothing.
  */
-void mm_free(void *ptr)
+void mm_free(void *bp)
 {
-    size_t size - GET_SIZE(HDRP(bp));
+    size_t size = GET_SIZE(HDRP(bp));
 
     PUT(HDRP(bp), PACK(size, 0));
     PUT(FTRP(bp), PACK(size, 0));
@@ -189,7 +189,7 @@ static void* extend_heap(size_t words)
     }
 
     /* Initialize free block header/footer and the epilogue header */
-    PUT(HDRP(bp), PACK(size, 0);
+    PUT(HDRP(bp), PACK(size, 0));
     PUT(FTRP(bp), PACK(size, 0));
     PUT(HDRP(NEXT_BLKP(bp)), PACK(0, 1));
 
@@ -249,7 +249,7 @@ static void* find_fit(size_t asize)
     /* Best-fit search */
 
     return NULL; /* No fit */
-#endif
+//#endif
 }
 
 static void place(void* bp, size_t asize)
