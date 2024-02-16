@@ -77,7 +77,7 @@ team_t team = {
 int mm_init(void)
 {
     /* Creat the initial empty heap */
-    heap_listp = mem_sbrk(4 * WSIZE);
+    static char *heap_listp = mem_sbrk(4 * WSIZE);
     if ( heap_listp == (void*) - 1) {
         return -1;
     }
