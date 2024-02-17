@@ -71,14 +71,15 @@ team_t team = {
 
 #define SIZE_T_SIZE (ALIGN(sizeof(size_t)))
 
+static void* heap_listp;
+
 /* 
  * mm_init - initialize the malloc package.
  */
 int mm_init(void)
 {
     /* Creat the initial empty heap */
-    static char *heap_listp = mem_sbrk(4 * WSIZE);
-    if ( heap_listp == (void*) - 1) {
+    if ((heap_listp = mem_sbrk(4 * WSIZE)) == (void*) - 1) {
         return -1;
     }
 

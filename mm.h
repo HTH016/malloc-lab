@@ -8,7 +8,7 @@ static void* extend_heap(size_t words);
 static void* coalesce(void* bp);
 static void* find_fit(size_t asize);
 static void place(void* bp, size_t asize);
-
+static void* heap_listp;
 /* 
  * Students work in teams of one or two.  Teams enter their team name, 
  * personal names and login IDs in a struct of this
