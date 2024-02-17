@@ -71,6 +71,10 @@ team_t team = {
 
 #define SIZE_T_SIZE (ALIGN(sizeof(size_t)))
 
+static void* extend_heap(size_t words);
+static void* coalesce(void* bp);
+static void* find_fit(size_t asize);
+static void place(void* bp, size_t asize);
 static void* heap_listp;
 
 /* 
