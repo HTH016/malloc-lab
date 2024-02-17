@@ -75,7 +75,7 @@ static void* extend_heap(size_t words);
 static void* coalesce(void* bp);
 static void* find_fit(size_t asize);
 static void place(void* bp, size_t asize);
-static void* heap_listp;
+static char* heap_listp;
 
 /* 
  * mm_init - initialize the malloc package.
@@ -174,7 +174,7 @@ void *mm_realloc(void *ptr, size_t size)
     newptr = mm_malloc(size);
     if (newptr == NULL)
       return NULL;
-    copySize = *(size_t *)((char *)oldptr - SIZE_T_SIZE);
+    copySize = (size_t) GET_SIZE(HDRP(oldptr));
     if (size < copySize)
       copySize = size;
     memcpy(newptr, oldptr, copySize);
