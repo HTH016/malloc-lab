@@ -120,7 +120,7 @@ void *mm_malloc(size_t size)
         asize = 2 * DSIZE;
     }
     else {
-        asize = DSIZE * (size + (DSIZE)+(DSIZE - 1) / DSIZE);
+        asize = DSIZE * ((size + (DSIZE)+(DSIZE - 1)) / DSIZE);
     }
 
     /* Search the free list for a fit */
